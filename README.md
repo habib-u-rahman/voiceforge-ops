@@ -168,3 +168,14 @@ The dashboard features **1-Click Judge Presets** for easy testing without active
 1.  **Morning Executive Sync**: Resolves relative times ("tomorrow at 9 AM" becomes exact timestamp), drafts planning emails, and updates marketing boards.
 2.  **Emergency Hotfix & Deployment**: Prompts a `CRITICAL` risk telemetry warning and requires manual human confirmation because it is flagged as an urgent server patch.
 3.  **Investor Pitch Scheduling**: Generates calendar sync cards and drafts follow-up messages for partners.
+
+---
+
+## 📱 Testing on a Phone
+
+The dashboard layout is responsive (tap-to-speak mic button, stacked cards, full-width history drawer), but the browser **microphone API only works over a secure context** — `localhost` or HTTPS, never a plain `http://<lan-ip>:5173` URL. To try voice input from a real phone on the same Wi-Fi:
+1. Run `npm run dev -- --host` in `frontend/` and note the "Network" URL Vite prints.
+2. Tunnel it through HTTPS (e.g. `npx ngrok http 5173`) and open the `https://` tunnel URL on the phone — mobile Chrome/Safari will refuse `getUserMedia` on a bare HTTP LAN address.
+3. Update `API_BASE` in `frontend/src/App.jsx` (or the CORS origins in `backend/main.py`) if the backend is reached via a different host than `127.0.0.1`.
+
+Without a tunnel, the mic button will fail silently on mobile browsers — the file-upload and demo-preset flows still work over plain HTTP.

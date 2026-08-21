@@ -9,32 +9,32 @@ export default function Header({
   isBackendConnected 
 }) {
   return (
-    <header className="border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-md sticky top-0 z-40 px-6 py-4 glow-indigo">
+    <header className="border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-md sticky top-0 z-40 px-4 sm:px-6 py-3 sm:py-4 glow-indigo">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
         {/* Title & Brand */}
         <div className="flex items-center gap-3">
           <div className="relative">
-            <div className="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+            <div className="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shrink-0">
               <Zap className="w-5 h-5 animate-pulse" />
             </div>
             {isBackendConnected && (
               <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-zinc-950" />
             )}
           </div>
-          <div>
-            <h1 className="text-xl font-bold tracking-wider text-zinc-100 m-0 font-sans flex items-center gap-2">
-              VOICEFORGE OPS <span className="text-indigo-500 font-mono text-sm tracking-widest">// MISSION CONTROL</span>
+          <div className="min-w-0">
+            <h1 className="text-base sm:text-xl font-bold tracking-wider text-zinc-100 m-0 font-sans flex flex-wrap items-center gap-1.5 sm:gap-2">
+              VOICEFORGE OPS <span className="text-indigo-500 font-mono text-xs sm:text-sm tracking-widest">// MISSION CONTROL</span>
             </h1>
-            <p className="text-xs text-zinc-400 font-mono">Autonomous AI Executive Agent System</p>
+            <p className="text-[11px] sm:text-xs text-zinc-400 font-mono truncate">Autonomous AI Executive Agent System</p>
           </div>
         </div>
 
         {/* Live Telemetry Info */}
-        <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs font-mono">
           
           {/* LPU Status Badge */}
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -44,7 +44,7 @@ export default function Header({
           </div>
 
           {/* Latency Meter */}
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800">
+          <div className="flex items-center gap-2 px-2.5 sm:px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800">
             <Activity className="w-3.5 h-3.5 text-cyan-400" />
             <span className="text-zinc-300">LATENCY:</span>
             <span className="text-cyan-400 font-semibold">{latency ? `${latency}ms` : 'IDLE'}</span>
