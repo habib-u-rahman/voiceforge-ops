@@ -21,14 +21,20 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS middleware configuration
+# CORS middleware configuration.
+# ALLOWED_ORIGINS is a comma-separated list (e.g. the deployed frontend's
+# Render URL); defaults to "*" so local dev and first deploys work with no
+# extra config. allow_credentials must stay False for "*" to be valid per
+# the CORS spec.
+_allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "*")
+_allowed_origins = (
+    ["*"] if _allowed_origins_env.strip() == "*"
+    else [origin.strip() for origin in _allowed_origins_env.split(",") if origin.strip()]
+)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "*",
-    ],
+    allow_origins=_allowed_origins,
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],

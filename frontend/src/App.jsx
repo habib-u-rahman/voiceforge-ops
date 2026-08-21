@@ -7,7 +7,7 @@ import ActionCards from './components/ActionCards';
 import HistoryDrawer from './components/HistoryDrawer';
 import { ShieldCheck, Activity, HelpCircle } from 'lucide-react';
 
-const API_BASE = 'http://127.0.0.1:8000';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000';
 
 export default function App() {
   const [isDryRun, setIsDryRun] = useState(true);
