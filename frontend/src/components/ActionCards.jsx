@@ -13,7 +13,10 @@ import {
   ChevronUp,
   ExternalLink,
   ShieldCheck,
-  Percent
+  Percent,
+  Brain,
+  Sparkles,
+  RefreshCw
 } from 'lucide-react';
 
 export default function ActionCards({ actions, meta, onDispatch, isDryRun }) {
@@ -89,6 +92,32 @@ export default function ActionCards({ actions, meta, onDispatch, isDryRun }) {
                 <span className="text-xs font-mono text-cyan-400 font-bold">{meta.estimated_execution_time_ms}ms</span>
               </div>
             </div>
+
+            {/* AI Reasoning Explanation */}
+            {meta.risk_reasoning && (
+              <div className="flex gap-2 items-start bg-zinc-900/50 border border-zinc-800 px-3 py-2.5 rounded-lg">
+                <Brain className="w-3.5 h-3.5 text-indigo-400 shrink-0 mt-0.5" />
+                <div>
+                  <span className="block text-[9px] text-zinc-500 uppercase tracking-wider font-mono">Why the AI decided this</span>
+                  <span className="text-[11px] text-zinc-300 leading-relaxed">{meta.risk_reasoning}</span>
+                </div>
+              </div>
+            )}
+
+            {/* Agent Pipeline Trace */}
+            {meta.agent_trace && meta.agent_trace.length > 0 && (
+              <div className="flex flex-wrap items-center gap-1.5">
+                <span className="text-[9px] text-zinc-500 uppercase tracking-wider font-mono mr-1">Pipeline:</span>
+                {meta.agent_trace.map((agent, i) => (
+                  <React.Fragment key={i}>
+                    <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
+                      {agent}
+                    </span>
+                    {i < meta.agent_trace.length - 1 && <span className="text-zinc-700 text-[9px]">→</span>}
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -270,6 +299,20 @@ export default function ActionCards({ actions, meta, onDispatch, isDryRun }) {
                           </p>
                         </div>
                       </div>
+                    </div>
+                  )}
+
+                  {/* Per-Action Explanation */}
+                  {action.reasoning && (
+                    <div className="flex gap-2 items-start bg-zinc-900/40 border border-zinc-800/80 rounded p-2.5">
+                      {action.rescheduled ? (
+                        <RefreshCw className="w-3 h-3 text-amber-400 shrink-0 mt-0.5" />
+                      ) : (
+                        <Sparkles className="w-3 h-3 text-indigo-400 shrink-0 mt-0.5" />
+                      )}
+                      <p className="text-[10px] text-zinc-400 leading-relaxed font-sans">
+                        {action.reasoning}
+                      </p>
                     </div>
                   )}
                 </div>
