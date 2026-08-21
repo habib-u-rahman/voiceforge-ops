@@ -47,15 +47,17 @@ will actually be dispatched (post-rescheduling), not the agent's first draft.
 action's timing, recipient, or scope, it must run *before* the Risk Agent in
 the pipeline, not after.
 
-## ADR-004: Groq (Whisper-v3 + LLaMA 3.3) for the full ASR + reasoning path
+## ADR-004: Groq (Whisper-v3 + a hosted chat model) for the full ASR + reasoning path
 
 **Decision:** Both transcription and multi-intent parsing run on Groq's LPU
-inference (`whisper-large-v3`, `llama-3.3-70b-versatile`), not OpenAI or a
-local model.
+inference (`whisper-large-v3` for ASR, currently `openai/gpt-oss-120b` for
+chat/reasoning — swapped in 2026-08 after Groq deprecated
+`llama-3.3-70b-versatile`), not OpenAI or a local model.
 
 **Why:** The demo's value proposition is sub-second, executive-usable voice
-command turnaround; Groq's LPU latency is the enabling factor, not a
-swappable implementation detail.
+command turnaround; Groq's LPU latency is the enabling factor, not the
+specific model ID — the chat model is expected to change again as Groq's
+catalog evolves, and that's fine as long as it still supports JSON mode.
 
 **Implication for future changes:** Don't introduce a slower model in the
 critical path without also revisiting the "sub-500ms" latency claims surfaced

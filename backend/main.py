@@ -57,7 +57,7 @@ async def transcribe_audio(file: UploadFile = File(...)):
 async def parse_actions(request: ParseRequest):
     """
     Multi-Intent Action Parser endpoint.
-    Uses llama-3.3-70b-versatile with JSON response format.
+    Uses openai/gpt-oss-120b (via Groq) with JSON response format.
     Resolves relative times based on current UTC time and performs risk/conflict assessment.
     """
     parsed_actions = await parse_actions_service(request.text)

@@ -7,7 +7,7 @@ VoiceForge Ops is an elite, autonomous AI executive operations dashboard designe
 ## 🚀 Key Features
 
 *   **🎙️ Real-time Voice Command Transcription**: Powered by Groq LPU processing and the Whisper-v3 (`whisper-large-v3`) engine for sub-second, multi-lingual audio decoding.
-*   **🧠 Multi-Intent Reasoning Engine**: Powered by Groq LLaMA 3.3 (`llama-3.3-70b-versatile`) Chat Completions, parsing complex operations into discrete intents.
+*   **🧠 Multi-Intent Reasoning Engine**: Powered by Groq (`openai/gpt-oss-120b`) Chat Completions, parsing complex operations into discrete intents.
 *   **⚠️ Safety & Conflict Detection Engine**: Automated analysis of data operations:
     *   **Confidence Scoring**: Gauges understanding accuracy.
     *   **Risk Categorization**: Flags critical financial/credential threats or medium-level external domains.

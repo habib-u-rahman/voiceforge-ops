@@ -80,7 +80,7 @@ async def _intent_agent(text: str, current_utc_time: str) -> dict:
     )
 
     completion = groq_client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model="openai/gpt-oss-120b",
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": text}
@@ -230,7 +230,7 @@ async def _risk_agent(text: str, summary: str, actions: List[dict], conflict_not
     })
 
     completion = groq_client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model="openai/gpt-oss-120b",
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_payload}
