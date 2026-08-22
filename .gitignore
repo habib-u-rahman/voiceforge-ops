@@ -16,3 +16,10 @@ frontend/.env
 .idea
 .DS_Store
 *.log
+
+# Demo/video assets (large binaries, not source — keep out of git history)
+*.mp4
+*.mov
+*.gif
+*.pptx
+/*.pdf
